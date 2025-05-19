@@ -5,7 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
 import { ProductModule } from './product/product.module'
 import { UploadModule } from './upload/upload.module';
-
+import { OrderModule } from './order/order.module';
+import { PayzeService } from './payze/payze.service';
 
 
 
@@ -29,9 +30,10 @@ import { UploadModule } from './upload/upload.module';
 }),
     ProductModule,
     UploadModule,
+    OrderModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PayzeService],
 })
 export class AppModule {}
 

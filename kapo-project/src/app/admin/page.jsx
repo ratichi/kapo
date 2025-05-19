@@ -6,7 +6,10 @@ export default function AdminPanel() {
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [image, setImage] = useState('')
-    const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([])
+  const [description, setDescription] = useState('')
+  const [gender, setGender] = useState('')
+  const [type, setType] = useState('')
 
   const fetchProducts = async () => {
     const res = await fetch('http://localhost:3000/product')
@@ -28,7 +31,7 @@ export default function AdminPanel() {
     await fetch('http://localhost:3000/product', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, price: Number(price), image }),
+      body: JSON.stringify({ name, price: Number(price), image, description, gender, type }),
     })
   }
 
@@ -54,6 +57,44 @@ export default function AdminPanel() {
             value={image}
             onChange={(e) => setImage(e.target.value)}
         />
+        <textarea
+          className="border p-2 mb-2 w-full"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        ></textarea>
+
+        <div className="flex gap-4 mb-2">
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              checked={gender === 'male'}
+              onChange={(e) => setGender(e.target.value)}
+            /> Male
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              checked={gender === 'female'}
+              onChange={(e) => setGender(e.target.value)}
+            /> Female
+          </label>
+        </div>
+
+        <select
+          className="border p-2 mb-2 w-full text-black"
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        >
+          <option value="">Select Type</option>
+          <option value="shoes">Shoes</option>
+          <option value="pants">Pants</option>
+          <option value="shirts">Shirts</option>
+        </select>
         <button
             className="bg-blue-600 text-white px-4 py-2 rounded"
             onClick={submitProduct}

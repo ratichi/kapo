@@ -1,7 +1,9 @@
 import { ShoppingCart } from 'lucide-react'
+import { useCart } from './CartContex'
 
 export default function ProductCard({ product }) {
   const { name, price, oldPrice, image, discount } = product
+  const { addToCart } = useCart()
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
@@ -27,7 +29,10 @@ export default function ProductCard({ product }) {
           )}
         </div>
 
-        <button className="mt-2 w-full flex items-center justify-center bg-black text-white text-sm font-medium py-2 px-4 rounded-xl hover:bg-gray-800 transition-colors">
+        <button
+          onClick={() => addToCart(product)}
+          className="mt-4 w-full flex items-center justify-center bg-black text-white text-sm font-medium py-2 px-4 rounded hover:bg-gray-800 transition"
+        >
           <ShoppingCart className="w-4 h-4 mr-2" />
           Add to Cart
         </button>

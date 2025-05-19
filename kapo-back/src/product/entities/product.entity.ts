@@ -18,4 +18,13 @@ export class Product {
 
   @Column({ nullable: true }) // The image column can be null
   image: string;
+  
+  @Column({ nullable: true })
+  description: string;
+
+  @Column({ nullable: true })
+  type: string;
+
+  @Column({ nullable: true })
+  gender: string; // 'male' or 'female'
 }

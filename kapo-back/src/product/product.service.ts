@@ -15,8 +15,8 @@ export class ProductService {
   ) {}
 
   // Create a new product
-  async createProduct(name: string, price: number, image: string): Promise<Product> {
-    const product = this.productRepository.create({ name, price, image });
+  async createProduct(name: string, price: number, image: string ,  description: string, type: string, gender: string,): Promise<Product> {
+    const product = this.productRepository.create({ name, price, image, description, type, gender });
     return await this.productRepository.save(product);
   }
 
