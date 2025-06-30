@@ -1,5 +1,6 @@
 import { ShoppingCart } from 'lucide-react'
 import { useCart } from './CartContex'
+import Link from 'next/link'
 
 export default function ProductCard({ product }) {
   const { name, price, oldPrice, image, discount } = product
@@ -7,6 +8,7 @@ export default function ProductCard({ product }) {
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+      <Link href={`/product/${product.id}`}>
       <div className="relative group">
         <img
           src={image}
@@ -37,6 +39,7 @@ export default function ProductCard({ product }) {
           Add to Cart
         </button>
       </div>
+      </Link>
     </div>
   )
 }
