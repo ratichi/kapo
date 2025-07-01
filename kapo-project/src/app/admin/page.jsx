@@ -33,6 +33,7 @@ export default function AdminPanel() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, price: Number(price), image, description, gender, type }),
     })
+    window.location.reload();
   }
 
   return (
@@ -86,7 +87,7 @@ export default function AdminPanel() {
         </div>
 
         <select
-          className="border p-2 mb-2 w-full text-black"
+          className="border p-2 mb-2 w-full text-black bg-green-500"
           value={type}
           onChange={(e) => setType(e.target.value)}
         >
