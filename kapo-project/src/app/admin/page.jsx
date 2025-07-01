@@ -12,7 +12,7 @@ export default function AdminPanel() {
   const [type, setType] = useState('')
 
   const fetchProducts = async () => {
-    const res = await fetch('http://localhost:3000/product')
+    const res = await fetch('https://kapo.onrender.com/product')
     const data = await res.json()
     setProducts(data)
   }
@@ -22,7 +22,7 @@ export default function AdminPanel() {
   }, [])
 
   const deleteProduct = async (id) => {
-    await fetch(`http://localhost:3000/product/${id}`, {
+    await fetch(`https://kapo.onrender.com/product/${id}`, {
       method: 'DELETE',
     })
     fetchProducts() // Refresh list after deletion
