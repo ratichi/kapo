@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { ShoppingCart, User, Menu, X } from 'lucide-react'
 import { useCart } from './CartContex'
+import Image from 'next/image';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -14,12 +15,19 @@ export default function Header() {
         <div className="flex justify-around h-16 items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="/" className="text-2xl font-bold text-gray-800">KapoShop</a>
+            <Image
+              src="/assets/logo.jpg"
+              alt="Logo"
+              width={100}
+              height={50}
+              className='w-[50px]'
+            />
+            <a href="/" className="text-2xl font-bold text-gray-800">Copley</a>
           </div>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex space-x-6">
-            <a href="/shop" className="text-gray-600 hover:text-black">Shop</a>
+            <a href="/shop" className="text-gray-600 hover:text-black">Store</a>
             <a href="/about" className="text-gray-600 hover:text-black">About</a>
             <a href="/contact" className="text-gray-600 hover:text-black">Contact</a>
           </nav>

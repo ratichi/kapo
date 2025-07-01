@@ -38,28 +38,28 @@ export default function AdminPanel() {
   return (
     <div>
         <div className="p-8 max-w-lg mx-auto">
-        <h1 className="text-2xl mb-4">Add New Product</h1>
+        <h1 className="text-2xl mb-4">ახალი პროდუქტის დამატება</h1>
         <input
             className="border p-2 mb-2 w-full"
-            placeholder="Name"
+            placeholder="სახელი"
             value={name}
             onChange={(e) => setName(e.target.value)}
         />
         <input
             className="border p-2 mb-2 w-full"
-            placeholder="Price"
+            placeholder="ფასი"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
         />
         <input
             className="border p-2 mb-2 w-full"
-            placeholder="Image URL"
+            placeholder="სურათის ლინკი"
             value={image}
             onChange={(e) => setImage(e.target.value)}
         />
         <textarea
           className="border p-2 mb-2 w-full"
-          placeholder="Description"
+          placeholder="აღწერა"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
@@ -90,10 +90,14 @@ export default function AdminPanel() {
           value={type}
           onChange={(e) => setType(e.target.value)}
         >
-          <option value="">Select Type</option>
-          <option value="shoes">Shoes</option>
-          <option value="pants">Pants</option>
-          <option value="shirts">Shirts</option>
+          <option value="">აირჩიე კატეგორია</option>
+          <option value="ყელსაბამი">ყელსაბამი</option>
+          <option value="გვირგვინი">გვირგვინი</option>
+          <option value="ფეხის აქსესუარი">ფეხის აქსესუარი</option>
+          <option value="ყურის აქსესუარი">ყურის აქსესუარი</option>
+          <option value="მკლავის აქსესუარი">მკლავის აქსესუარი</option>
+          <option value="მაჯის აქსესუარი">მაჯის აქსესუარი</option>
+          <option value="სხვა">სხვა</option>
         </select>
         <button
             className="bg-blue-600 text-white px-4 py-2 rounded"
