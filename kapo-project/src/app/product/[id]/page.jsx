@@ -14,7 +14,7 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const res = await fetch(`http://localhost:3000/product/${id}`)
+      const res = await fetch(`https://kapo.onrender.com/product/${id}`)
       const data = await res.json()
       setProduct(data)
     }

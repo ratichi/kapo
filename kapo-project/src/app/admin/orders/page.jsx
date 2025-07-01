@@ -8,7 +8,7 @@ export default function AdminOrdersPage() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetch('http://localhost:3000/order') // Your NestJS API endpoint to get orders
+    fetch('https://kapo.onrender.com/order') // Your NestJS API endpoint to get orders
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch orders')
         return res.json()

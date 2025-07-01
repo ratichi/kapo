@@ -33,7 +33,7 @@ export default function CheckoutForm() {
     const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
     // Call backend to create payment intent
-    const res = await fetch('http://localhost:3001/order/create-payment-intent', {
+    const res = await fetch('https://kapo.onrender.com/order/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount: totalAmount }),
@@ -55,8 +55,8 @@ export default function CheckoutForm() {
         quantity: item.quantity,
       })),
       mode: 'payment',
-      successUrl: 'http://localhost:3000/success',
-      cancelUrl: 'http://localhost:3000/checkout',
+      successUrl: 'https://kapo.onrender.com/success',
+      cancelUrl: 'https://kapo.onrender.com/checkout',
     })
 
     if (stripeError) throw new Error(stripeError.message)

@@ -7,7 +7,7 @@ export default function ProductList() {
     const [products, setProducts] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3000/product') // your NestJS backend
+    fetch('https://kapo.onrender.com/product') // your NestJS backend
       .then((res) => res.json())
       .then((data) => setProducts(data))
   }, [])

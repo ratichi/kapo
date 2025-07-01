@@ -28,7 +28,7 @@ export default function AdminPanel() {
     fetchProducts() // Refresh list after deletion
   }
   const submitProduct = async () => {
-    await fetch('http://localhost:3000/product', {
+    await fetch('https://kapo.onrender.com/product', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, price: Number(price), image, description, gender, type }),
