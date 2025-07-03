@@ -1,14 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { PrismaClient } from '@prisma/client';
 
 // src/product/product.service.ts
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
+interface FilterParams {
+  gender?: string;
+  type?: string;
+}
 
 @Injectable()
 export class ProductService {
+  private prisma = new PrismaClient();
   constructor(
     @InjectRepository(Product)
     private productRepository: Repository<Product>,
@@ -40,4 +46,26 @@ export class ProductService {
   async deleteProduct(id: number): Promise<void> {
     await this.productRepository.delete(id);
   }
+   async findFiltered(filters: FilterParams) {
+    const { gender, type } = filters;
+
+    // For example, if using Prisma:
+    const whereClause: any = {};
+
+    if (gender) {
+      whereClause.gender = gender;
+    }
+
+    if (type) {
+      whereClause.type = type;
+    }
+
+    // Query database with filters (replace with your ORM syntax)
+    const products = await this.prisma.product.findMany({
+      where: whereClause,
+    });
+
+    return products;
+  }
+  
 }

@@ -1,7 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { CartProvider } from "./components/CartContex";
-
+import { useCart } from "./components/CartContex";
+import { FilterProvider } from "./context/Filtercontext";
 import "./globals.css";
+import Header from "./components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,9 +26,16 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <FilterProvider>
         <CartProvider>
+            <div className="flex justify-center">
+              <div className="w-full max-w-5xl">
+                <Header />
+              </div>
+            </div>
           {children}
         </CartProvider>
+        </FilterProvider>
       </body>
     </html>
   );

@@ -3,7 +3,7 @@ import { useCart } from './CartContex'
 import Link from 'next/link'
 
 export default function ProductCard({ product }) {
-  const { name, price, oldPrice, image, discount } = product
+  const { name, price, oldPrice, image, discount, description, type } = product
   const { addToCart } = useCart()
 
   return (
@@ -21,9 +21,11 @@ export default function ProductCard({ product }) {
           </span>
         )}
       </div>
-
+      </Link>
       <div className="p-4 space-y-2">
         <h3 className="text-base font-semibold text-gray-900 truncate">{name}</h3>
+        <h2 className="text-base font-semibold text-gray-900 truncate">{description}</h2>
+        <h2 className="text-base font-semibold text-gray-900 truncate">{type}</h2>
         <div className="flex items-center gap-2">
           <span className="text-lg font-bold text-green-600">₾{price}</span>
           {oldPrice && (
@@ -39,7 +41,7 @@ export default function ProductCard({ product }) {
           Add to Cart
         </button>
       </div>
-      </Link>
+      
     </div>
   )
 }

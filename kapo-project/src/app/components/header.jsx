@@ -3,15 +3,89 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { ShoppingCart, User, Menu, X } from 'lucide-react'
 import { useCart } from './CartContex'
+import { useFilter } from '../context/Filtercontext'
 import Image from 'next/image';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const { cart } = useCart()
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedType, setSelectedType] = useState('');
+  const { filters, setFilters } = useFilter();
+  const { cart } = useCart()
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {filterOpen && (
+  <div className="absolute right-4 mt-2 bg-white border shadow-lg rounded-md p-4 z-50 w-[300px]">
+    {/* Gender Checkboxes */}
+    <div className="mb-4">
+      <p className="font-semibold mb-2">სქესი</p>
+      <label className="block">
+        <input
+          type="radio"
+          name="gender"
+          value="male"
+          checked={selectedGender === 'male'}
+          onChange={(e) => setSelectedGender(e.target.value)}
+        /> მამაკაცი
+      </label>
+      <label className="block">
+        <input
+          type="radio"
+          name="gender"
+          value="female"
+          checked={selectedGender === 'female'}
+          onChange={(e) => setSelectedGender(e.target.value)}
+        /> ქალი
+      </label>
+    </div>
+
+    {/* Type Selector */}
+    <div className="mb-4">
+      <p className="font-semibold mb-2">კატეგორია</p>
+      <select
+        value={selectedType}
+        onChange={(e) => setSelectedType(e.target.value)}
+        className="w-full border border-gray-300 rounded-md px-2 py-1"
+      >
+        <option value="">აირჩიე კატეგორია</option>
+        <option value="ყელსაბამი">ყელსაბამი</option>
+        <option value="გვირგვინი">გვირგვინი</option>
+        <option value="ფეხის აქსესუარი">ფეხის აქსესუარი</option>
+        <option value="ყურის აქსესუარი">ყურის აქსესუარი</option>
+        <option value="მკლავის აქსესუარი">მკლავის აქსესუარი</option>
+        <option value="მაჯის აქსესუარი">მაჯის აქსესუარი</option>
+        <option value="სხვა">სხვა</option>
+      </select>
+    </div>
+
+    {/* Buttons */}
+    <div className="flex justify-between">
+      <button
+        className="text-sm text-gray-600 hover:underline"
+        onClick={() => {
+          setSelectedGender('');
+          setSelectedType('');
+        }}
+      >
+        გასუფთავება
+      </button>
+      <button
+        onClick={() => {
+          setFilters({ gender: selectedGender, type: selectedType });
+          setFilterOpen(false);
+          // ⬇ Trigger filter fetch with selectedGender and selectedType here
+        }}
+        className="px-3 py-1 bg-black text-white text-sm rounded hover:bg-gray-800"
+      >
+        გაფილტვრა
+      </button>
+    </div>
+  </div>
+)}
+
         <div className="flex justify-around h-16 items-center">
           {/* Logo */}
           <div className="flex items-center">
@@ -33,12 +107,18 @@ export default function Header() {
           </nav>
 
           {/* Search bar */}
-          <div className="hidden md:block flex-1 mx-6">
+          <div className="hidden md:flex items-center gap-4">
             <input
               type="text"
               placeholder="Search products..."
               className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
             />
+              <button
+                onClick={() => setFilterOpen(!filterOpen)}
+                className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800"
+              >
+                ფილტრი
+              </button>
           </div>
 
 

@@ -2,7 +2,7 @@
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 // src/product/product.controller.ts
-import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './entities/product.entity';
 
@@ -19,8 +19,11 @@ export class ProductController {
 
   // Get all products
   @Get()
-  async findAll(): Promise<Product[]> {
-    return this.productService.getAllProducts();
+  async getProducts(
+    @Query('gender') gender?: string,
+    @Query('type') type?: string,
+  ) {
+    return this.productService.findFiltered({ gender, type });
   }
 
   // Get a product by ID
@@ -48,4 +51,6 @@ export class ProductController {
   async remove(@Param('id') id: number): Promise<void> {
     return this.productService.deleteProduct(id);
   }
+
+
 }
