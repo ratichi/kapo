@@ -12,9 +12,9 @@ export class ProductController {
 
   // Create a new product
   @Post()
-  async create(@Body() body: { name: string; price: number; image: string;  description:string; type:string; gender:string }): Promise<Product> {
-    const { name, price, image, description,  type, gender } = body;
-    return this.productService.createProduct(name, price, image,  description, type, gender, );
+  async create(@Body() body: { name: string; price: number; image: string;  description:string; type:string; gender:string; images:string[] }): Promise<Product> {
+    const { name, price, image, description,  type, gender, images } = body;
+    return this.productService.createProduct(name, price, image,  description, type, gender, images );
   }
 
   // Get all products
