@@ -10,6 +10,17 @@ export default function AdminPanel() {
   const [description, setDescription] = useState('')
   const [gender, setGender] = useState('')
   const [type, setType] = useState('')
+  const [imageLinks, setImageLinks] = useState([""]);
+
+  const handleImageChange = (index, value) => {
+    const newLinks = [...imageLinks];
+    newLinks[index] = value;
+    setImageLinks(newLinks);
+  };
+
+  const addImageField = () => {
+    setImageLinks([...imageLinks, ""]);
+  };
 
   const fetchProducts = async () => {
     const res = await fetch('https://kapo.onrender.com/product')
@@ -31,7 +42,7 @@ export default function AdminPanel() {
     await fetch('https://kapo.onrender.com/product', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, price: Number(price), image, description, gender, type }),
+      body: JSON.stringify({ name, price: Number(price), image, description, gender, type, images: imageLinks.filter(Boolean) }),
     })
     window.location.reload();
   }
@@ -58,6 +69,26 @@ export default function AdminPanel() {
             value={image}
             onChange={(e) => setImage(e.target.value)}
         />
+        <div className="mb-4">
+          <label className="font-semibold mb-2 block">Cloudinary სურათის ლინკები:</label>
+          {imageLinks.map((link, index) => (
+            <input
+              key={index}
+              className="border p-2 mb-2 w-full"
+              type="text"
+              placeholder={`სურათის ლინკი #${index + 1}`}
+              value={link}
+              onChange={(e) => handleImageChange(index, e.target.value)}
+            />
+          ))}
+          <button
+            type="button"
+            onClick={addImageField}
+            className="text-blue-600 hover:underline"
+          >
+            + სურათის დამატება
+          </button>
+        </div>
         <textarea
           className="border p-2 mb-2 w-full"
           placeholder="აღწერა"

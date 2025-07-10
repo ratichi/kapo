@@ -27,4 +27,7 @@ export class Product {
 
   @Column({ nullable: true })
   gender: string; // 'male' or 'female'
+
+  @Column("simple-array", { nullable: true }) // comma-separated string
+  images: string[];
 }
