@@ -4,6 +4,11 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { useCart } from '@/app/components/CartContex'
 import { motion } from 'framer-motion'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 
 export default function ProductDetailPage() {
@@ -32,7 +37,24 @@ export default function ProductDetailPage() {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <img src={product.image} alt={product.name} className="w-full h-96 object-cover mb-4 rounded-xl" />
+      <Swiper
+        modules={[Navigation, Pagination]}
+        navigation
+        pagination={{ clickable: true }}
+        className="mb-4 rounded-xl"
+        spaceBetween={10}
+        slidesPerView={1}
+      >
+        {(product.images?.length > 0 ? product.images : [product.image]).map((img, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={img}
+              alt={`Product image ${index + 1}`}
+              className="w-full h-96 object-cover rounded-xl"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
       <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
       <p className="text-xl text-green-600 font-semibold mb-2">₾{product.price}</p>
       <p className="text-gray-700 mb-2">{product.description}</p>
